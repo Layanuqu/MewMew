@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MewMew | متجر القطط</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box}
+body{margin:0;font-family:'Cairo',sans-serif;background:#fffaf7;color:#594b47}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;background:rgba(255,250,247,.96);backdrop-filter:blur(10px);z-index:20;border-bottom:1px solid #f2e5df}
+.brand{display:flex;align-items:center;gap:9px;cursor:pointer}.brand-mark{width:40px;height:40px;border-radius:14px;background:#f3d9d5;display:flex;align-items:center;justify-content:center;font-size:21px}.brand-sub{font-size:9px;color:#a58b84;letter-spacing:.5px;margin-top:-5px}
+.nav{max-width:1120px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:26px;font-weight:700;color:#9b6f67;cursor:pointer;white-space:nowrap}.logo span{font-size:18px}
+nav{display:flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+nav button{background:none;border:0;color:#6d5a55;padding:8px 10px;border-radius:12px}
+nav button:hover,nav button.active{background:#f8e8e4}
+.cart-btn{background:#f3d9d5!important;color:#76534d!important}
+.page{display:none}.page.active{display:block}
+.hero{max-width:1120px;margin:25px auto 0;padding:58px 32px;border-radius:30px;background:linear-gradient(135deg,#f9e7e3,#fff4ee);display:flex;align-items:center;justify-content:space-between;gap:35px}
+.hero h1{font-size:44px;margin:0 0 12px;color:#755750}.hero p{font-size:17px;line-height:1.9;max-width:570px}.hero-note{display:inline-block;background:#fff7f4;border:1px solid #f0ddd7;color:#9b7168;padding:6px 12px;border-radius:20px;font-size:12px;margin-bottom:12px}
+.btn{border:0;background:#b98278;color:#fff;padding:12px 22px;border-radius:15px;transition:.2s}.btn:hover{transform:translateY(-1px);opacity:.92}
+.outline{background:#fff;color:#9b6f67;border:1px solid #e1c7c0}
+.cat{font-size:92px;background:#fff;border-radius:50%;padding:25px;box-shadow:0 10px 30px #d8b7ad55}
+.section{max-width:1120px;margin:42px auto;padding:0 22px}.section h2{color:#755750;margin-bottom:8px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:20px}
+.card{background:#fff;border:1px solid #f1e5e0;border-radius:22px;padding:18px;box-shadow:0 6px 20px #d8b7ad20}
+.product-img{height:165px;background:linear-gradient(145deg,#f8e8e3,#fff7f3);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:68px;margin-bottom:15px;position:relative;overflow:hidden}.product-img:after{content:'MewMew';position:absolute;bottom:8px;right:10px;font-size:9px;color:#c09b92;letter-spacing:.5px}
+.card h3{margin:5px 0;color:#68504b}.price{font-weight:700;color:#a56d64;margin:8px 0 14px}.small{font-size:13px;color:#8b7771;line-height:1.7}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.search-wrap{display:flex;gap:8px;margin:18px 0 5px}.search-wrap input{flex:1;border:1px solid #e5d4cf;border-radius:15px;padding:11px 14px;background:#fff;outline:none}.search-wrap input:focus{border-color:#c9968d}.search-wrap span{background:#f3ddd8;border-radius:15px;padding:10px 14px}
+.categories{display:flex;gap:9px;flex-wrap:wrap;margin:15px 0 25px}
+.chip{border:1px solid #e7d2cb;background:#fff;color:#7a625c;padding:9px 15px;border-radius:20px}
+.chip.active,.chip:hover{background:#f3ddd8;border-color:#f3ddd8}
+.story{background:#fff;border-radius:24px;padding:30px;line-height:2;border:1px solid #f1e5e0}
+.empty{text-align:center;background:#fff;border-radius:22px;padding:45px;border:1px dashed #e4ccc5}
+.item{display:grid;grid-template-columns:70px 1fr auto auto;align-items:center;gap:14px;background:#fff;border:1px solid #f1e5e0;border-radius:18px;padding:13px;margin-bottom:12px}
+.thumb{width:70px;height:70px;background:#f9eeea;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.qty{display:flex;align-items:center;gap:8px}.qty button{border:0;background:#f6e4df;border-radius:9px;width:30px;height:30px}
+.summary{background:#fff;border:1px solid #f1e5e0;border-radius:22px;padding:22px;margin-top:20px}
+.summary-row{display:flex;justify-content:space-between;margin:9px 0}.total{font-size:20px;font-weight:700;color:#8e625a;border-top:1px solid #eee0db;padding-top:13px}
+.form{max-width:650px;background:#fff;border:1px solid #f1e5e0;border-radius:24px;padding:25px}
+.field{margin-bottom:15px}.field label{display:block;font-weight:600;margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;border:1px solid #e4d3ce;border-radius:13px;padding:11px;background:#fffdfc;outline:none}
+.field input:focus,.field textarea:focus{border-color:#c9968d}
+.product-detail{display:grid;grid-template-columns:1fr 1.1fr;gap:35px;align-items:start}
+.detail-img{min-height:390px;background:linear-gradient(145deg,#f8e8e3,#fff7f3);border-radius:28px;display:flex;align-items:center;justify-content:center;font-size:130px;position:relative}.detail-img:after{content:'MewMew';position:absolute;bottom:15px;right:18px;color:#c09b92;font-size:12px}
+.detail-info{background:#fff;border:1px solid #f1e5e0;border-radius:25px;padding:28px}
+.detail-info h1{margin-top:0;color:#755750}
+.price-big{font-size:25px;font-weight:700;color:#a56d64;margin:15px 0}
+.qty-box{display:flex;align-items:center;gap:10px;margin:18px 0}.qty-box input{width:65px;padding:9px;text-align:center;border:1px solid #e4d3ce;border-radius:10px}
+.steps{display:flex;align-items:center;justify-content:space-between;gap:5px;margin:25px 0 10px}
+.step{flex:1;text-align:center;color:#b8a8a3;font-size:12px}.circle{width:38px;height:38px;margin:0 auto 7px;border-radius:50%;background:#f0e6e2;display:flex;align-items:center;justify-content:center}
+.step.done,.step.current{color:#8d635b;font-weight:700}.step.done .circle,.step.current .circle{background:#e8c9c2;color:#755750}
+.order-card{background:#fff;border:1px solid #f1e5e0;border-radius:22px;padding:22px;margin-bottom:15px}
+footer{text-align:center;padding:40px;color:#927a73;font-size:13px}
+.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#6f5751;color:#fff;padding:12px 20px;border-radius:14px;display:none;z-index:30}
+.back{background:none;border:0;color:#9b6f67;padding:0;margin-bottom:15px}
+@media(max-width:700px){
+ .nav{padding:11px 12px;align-items:flex-start}.logo{font-size:21px}.brand-sub{display:none}nav button{font-size:12px;padding:7px 5px}
+ .hero{margin:12px;padding:35px 20px;flex-direction:column;text-align:center}.hero h1{font-size:32px}.cat{font-size:65px}
+ .product-detail{grid-template-columns:1fr}.detail-img{min-height:280px;font-size:95px}
+ .item{grid-template-columns:55px 1fr;}.item>.qty,.item>strong{grid-column:2}
+ .section{padding:0 15px}
+}
+</style>
+</head>
+<body>
+<header><div class="nav">
+<div class="brand" onclick="show('home')"><div class="brand-mark">🐾</div><div><div class="logo">MewMew</div><div class="brand-sub">for happy cats</div></div></div>
+<nav>
+<button id="nav-shop" onclick="show(&quot;shop&quot;)">المتجر</button>
+<button id="nav-orders" onclick="show('orders')">طلباتي</button>
+<button id="nav-story" onclick="show('story')">قصتنا</button>
+<button class="cart-btn" onclick="show('cart')">🛒 السلة <b id="count">0</b></button>
+</nav></div></header>
+
+<main>
+<section id="home" class="page active">
+<div class="hero">
+<div><div class="hero-note">مختارات لطيفة لقطتك 🤍</div><h1>كل اللي تحتاجه قطتك 🐱</h1><p>أهلًا بك في <b>MewMew</b>، متجر لطيف ومخصص لمحبي القطط. اكتشفي منتجات مختارة لراحة قطتك وسعادتها.</p><button class="btn" onclick="show(&quot;shop&quot;)">تسوقي الآن</button></div>
+<div class="cat">🐱</div>
+</div>
+<div class="section">
+<div class="section-head"><div><h2>تسوقي حسب الفئة 🐾</h2><div class="small">اختاري اللي تحتاجه قطتك بسرعة.</div></div></div>
+<div class="categories">
+<button class="chip" onclick="show('shop');filterProducts('all')">الكل</button>
+<button class="chip" onclick="show('shop');filterProducts('toys')">ألعاب</button>
+<button class="chip" onclick="show('shop');filterProducts('food')">أكل ووجبات</button>
+<button class="chip" onclick="show('shop');filterProducts('accessories')">إكسسوارات</button>
+<button class="chip" onclick="show('shop');filterProducts('care')">عناية</button>
+</div>
+<h2>الأكثر مبيعًا ⭐</h2><div class="grid" id="featured"></div>
+</div>
+</section>
+
+<section id="shop" class="page"><div class="section">
+<div class="section-head"><div><h2>منتجات MewMew 🛍️</h2><div class="small">منتجات بسيطة ولطيفة لاحتياجات قطتك.</div></div></div>
+<div class="search-wrap"><span>🔍</span><input id="searchInput" oninput="searchProducts()" placeholder="ابحثي عن منتج..."></div>
+<div class="categories">
+<button class="chip active" onclick="filterProducts('all',this)">الكل</button>
+<button class="chip" onclick="filterProducts('toys',this)">ألعاب</button>
+<button class="chip" onclick="filterProducts('food',this)">أكل ووجبات</button>
+<button class="chip" onclick="filterProducts('accessories',this)">إكسسوارات</button>
+<button class="chip" onclick="filterProducts('care',this)">عناية</button>
+</div>
+<div class="grid" id="products"></div>
+</div></section>
+
+<section id="detail" class="page"><div class="section">
+<button class="back" onclick="show(&quot;shop&quot;)">← العودة للمتجر</button>
+<div id="detailContent"></div>
+</div></section>
+
+<section id="cart" class="page"><div class="section">
+<h2>سلة المشتريات 🛒</h2><div id="cartList"></div>
+</div></section>
+
+<section id="checkout" class="page"><div class="section">
+<button class="back" onclick="show('cart')">← العودة للسلة</button>
+<h2>بيانات الطلب 📦</h2>
+<div class="form">
+<div class="field"><label>الاسم</label><input id="name" placeholder="اكتبي اسمك"></div>
+<div class="field"><label>رقم الجوال</label><input id="phone" placeholder="05xxxxxxxx" inputmode="tel"></div>
+<div class="field"><label>المدينة</label><input id="city" placeholder="مثال: جدة"></div>
+<div class="field"><label>العنوان</label><textarea id="address" rows="3" placeholder="اكتبي عنوان التوصيل"></textarea></div>
+<div class="field"><label>ملاحظات (اختياري)</label><textarea id="notes" rows="2" placeholder="أي ملاحظة للطلب"></textarea></div>
+<div id="checkoutSummary"></div>
+<button class="btn" style="width:100%;margin-top:10px" onclick="placeOrder()">مراجعة وتأكيد الطلب</button>
+</div>
+</div></section>
+
+<section id="confirmation" class="page"><div class="section">
+<div class="story" style="text-align:center">
+<div style="font-size:55px">🎉🐾</div><h2>تم تأكيد طلبك!</h2><p id="confirmText"></p>
+<button class="btn" onclick="show('orders')">متابعة الطلب</button>
+<button class="btn outline" onclick="show(&quot;shop&quot;)">العودة للمتجر</button>
+</div>
+</div></section>
+
+<section id="orders" class="page"><div class="section"><h2>طلباتي 📦</h2><div id="ordersList"></div></div></section>
+
+<section id="story" class="page"><div class="section"><h2>قصتنا 💕</h2><div class="story"><h3>من هنا بدأت MewMew 🐾</h3><p>بدأت MewMew من حب بسيط للقطط ورغبة في إنشاء مكان يجمع المنتجات التي يحتاجها أصحاب القطط بطريقة سهلة ولطيفة.</p><p>هدفنا أن تكون تجربة التسوق مريحة، واضحة، وممتعة — من اختيار المنتج إلى وصول الطلب.</p><p>لأن قطتك تستحق الدلال. 🤍</p></div></div></section>
+</main>
+<div class="toast" id="toast"></div>
+<footer>MewMew 🐾 — Made with love for cats</footer>
+
+<script>
+const products=[
+{id:1,name:"لعبة الفأر الصغيرة",price:25,emoji:"🐭",cat:"toys",desc:"لعبة لطيفة للترفيه واللعب وتحفيز قطتك."},
+{id:2,name:"سرير ناعم للقطط",price:89,emoji:"🛏️",cat:"accessories",desc:"سرير مريح وناعم لقيلولة هادئة ومريحة."},
+{id:3,name:"وعاء طعام",price:35,emoji:"🥣",cat:"food",desc:"وعاء عملي وأنيق لوجبات قطتك اليومية."},
+{id:4,name:"كرة تفاعلية",price:30,emoji:"⚽",cat:"toys",desc:"لعبة خفيفة تساعد قطتك على الحركة والمرح."},
+{id:5,name:"طوق قطط لطيف",price:29,emoji:"🎀",cat:"accessories",desc:"طوق ناعم بتصميم لطيف للاستخدام اليومي."},
+{id:6,name:"فرشاة للقطط",price:39,emoji:"🪮",cat:"care",desc:"فرشاة سهلة للعناية بفرو قطتك."}
+];
+let cart=JSON.parse(localStorage.getItem("mew_cart")||"[]");
+let orders=JSON.parse(localStorage.getItem("mew_orders")||"[]");
+let currentFilter="all"; let searchTerm="";
+
+function show(id){
+ document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+ if(id==='shop')document.getElementById('nav-shop').classList.add('active');
+ if(id==='orders')document.getElementById('nav-orders').classList.add('active');
+ if(id==='story')document.getElementById('nav-story').classList.add('active');
+ if(id==='cart')renderCart();
+ if(id==='orders')renderOrders();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function card(p){
+ return `<div class="card">
+ <div class="product-img">${p.emoji}</div><h3>${p.name}</h3>
+ <div class="small">${p.desc}</div><div class="price">${p.price} ر.س</div>
+ <div class="actions"><button class="btn" onclick="add(${p.id})">أضيفي للسلة</button><button class="btn outline" onclick="details(${p.id})">التفاصيل</button></div>
+ </div>`;
+}
+function render(){
+ renderProducts();
+ document.getElementById('featured').innerHTML=products.slice(0,3).map(card).join('');
+ updateCount();
+}
+function renderProducts(){
+ let list=currentFilter==="all"?products:products.filter(p=>p.cat===currentFilter);
+ if(searchTerm) list=list.filter(p=>(p.name+" "+p.desc).toLowerCase().includes(searchTerm.toLowerCase()));
+ document.getElementById('products').innerHTML=list.length?list.map(card).join(''):'<div class="empty" style="grid-column:1/-1">ما لقينا منتج بهذا الاسم 🐱<br><br><button class="btn" onclick="clearSearch()">عرض كل المنتجات</button></div>';
+}
+function searchProducts(){searchTerm=document.getElementById('searchInput').value.trim();renderProducts()}
+function clearSearch(){searchTerm='';document.getElementById('searchInput').value='';currentFilter='all';document.querySelectorAll('#shop .chip').forEach(x=>x.classList.remove('active'));document.querySelector('#shop .chip').classList.add('active');renderProducts()}
+function filterProducts(cat,el){
+ currentFilter=cat;
+ document.querySelectorAll('#shop .chip').forEach(x=>x.classList.remove('active'));
+ if(el)el.classList.add('active');
+ else document.querySelector('#shop .chip').classList.add('active');
+ renderProducts();
+}
+function add(id,qty=1){
+ let x=cart.find(i=>i.id===id);if(x)x.qty+=qty;else cart.push({id,qty});
+ save();toast("تمت إضافة المنتج للسلة 🐾");
+}
+function save(){localStorage.setItem("mew_cart",JSON.stringify(cart));localStorage.setItem("mew_orders",JSON.stringify(orders));updateCount()}
+function updateCount(){document.getElementById('count').textContent=cart.reduce((s,x)=>s+x.qty,0)}
+function details(id){
+ let p=products.find(x=>x.id===id);
+ document.getElementById('detailContent').innerHTML=`<div class="product-detail">
+ <div class="detail-img">${p.emoji}</div>
+ <div class="detail-info"><h1>${p.name}</h1><div class="price-big">${p.price} ر.س</div>
+ <p>${p.desc}</p><p class="small">منتج مختار بعناية ليكون مناسبًا للاستخدام اليومي ويضيف لمسة لطيفة إلى حياة قطتك.</p>
+ <div class="qty-box"><b>الكمية:</b><input id="detailQty" type="number" min="1" value="1"></div>
+ <button class="btn" onclick="addFromDetail(${p.id})">إضافة للسلة 🛒</button></div></div>`;
+ show('detail');
+}
+function addFromDetail(id){let q=Math.max(1,parseInt(document.getElementById('detailQty').value)||1);add(id,q)}
+function renderCart(){
+ let el=document.getElementById('cartList');
+ if(!cart.length){el.innerHTML='<div class="empty">السلة فاضية حاليًا 🐱<br><br><button class="btn" onclick="show(&quot;shop&quot;)">تصفحي المنتجات</button></div>';return}
+ let total=0;
+ el.innerHTML=cart.map(i=>{let p=products.find(x=>x.id===i.id);total+=p.price*i.qty;
+ return `<div class="item"><div class="thumb">${p.emoji}</div><div><b>${p.name}</b><div class="small">${p.price} ر.س للقطعة</div></div>
+ <div class="qty"><button onclick="change(${p.id},-1)">−</button><b>${i.qty}</b><button onclick="change(${p.id},1)">+</button></div><strong>${p.price*i.qty} ر.س</strong></div>`}).join('');
+ el.innerHTML+=`<div class="summary"><div class="summary-row"><span>عدد المنتجات</span><span>${cart.reduce((s,x)=>s+x.qty,0)}</span></div>
+ <div class="summary-row total"><span>الإجمالي</span><span>${total} ر.س</span></div>
+ <button class="btn" style="width:100%;margin-top:12px" onclick="startCheckout()">إتمام الطلب</button></div>`;
+}
+function change(id,n){let x=cart.find(i=>i.id===id);x.qty+=n;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save();renderCart()}
+function startCheckout(){
+ if(!cart.length)return;
+ let total=cart.reduce((s,i)=>s+products.find(p=>p.id===i.id).price*i.qty,0);
+ document.getElementById('checkoutSummary').innerHTML=`<div class="summary"><div class="summary-row total"><span>إجمالي الطلب</span><span>${total} ر.س</span></div></div>`;
+ show('checkout');
+}
+function placeOrder(){
+ let name=document.getElementById('name').value.trim(),phone=document.getElementById('phone').value.trim(),city=document.getElementById('city').value.trim(),address=document.getElementById('address').value.trim();
+ if(!name||!phone||!city||!address){toast("فضلاً أكملي البيانات المطلوبة 🌷");return}
+ let total=cart.reduce((s,i)=>s+products.find(p=>p.id===i.id).price*i.qty,0);
+ let num="MW"+String(Date.now()).slice(-5);
+ orders.unshift({num,total,name,phone,city,address,status:0,date:new Date().toLocaleDateString('ar-SA')});
+ cart=[];save();
+ document.getElementById('confirmText').innerHTML=`رقم طلبك هو <b>#${num}</b><br>الإجمالي: <b>${total} ر.س</b><br>تقدري تتابعي حالة الطلب من قسم «طلباتي».`;
+ show('confirmation');
+}
+function renderOrders(){
+ let el=document.getElementById('ordersList');
+ if(!orders.length){el.innerHTML='<div class="empty">ما عندك طلبات حتى الآن 📦<br><br><button class="btn" onclick="show(&quot;shop&quot;)">ابدئي التسوق</button></div>';return}
+ el.innerHTML=orders.map(o=>{
+ let steps=["تم الطلب","قيد التجهيز","تم الشحن","تم التوصيل"];
+ return `<div class="order-card"><div style="display:flex;justify-content:space-between;gap:10px"><div><h3 style="margin:0">طلب #${o.num}</h3><div class="small">${o.date||''}</div></div><b>${o.total} ر.س</b></div>
+ <div class="steps">${steps.map((s,i)=>`<div class="step ${i<o.status?'done':i===o.status?'current':''}"><div class="circle">${i<o.status?'✓':i+1}</div>${s}</div>`).join('')}</div>
+ <div class="small">عنوان التوصيل: ${o.city} — ${o.address}</div></div>`}).join('');
+}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',1800)}
+render();
+</script>
+</body>
+</html>
